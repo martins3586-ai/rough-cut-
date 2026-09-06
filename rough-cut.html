@@ -1,0 +1,2387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rough Cut — Training Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAE1UlEQVR4nO1WS2xVVRTd+5z77u+99tH20Q9QoCmlBUoLpTWUKkLDT8CERJAwQA0DCXGEYWQMiQ6MDo0hEicaPglOSMEfqeKvgKKGr0aolEJLKSL09b37v/d8HDzoD201xkQTzujmZq+zzj5r7XUvbtpRB//mIv/q7g8J/hMEyj/EI2LuQUr5hwV/qQOChJCxlYRQAGAsiqKQc06QDJGNXON0gAAydy43cIQUpp4AkLlTSyktJ6NrRjKvgFLFD7yMlSaEaqo2ppVRBIjIGCtIFu7a9ooW0ySCQpQwCtLZgZNnvvj6+3ZFiSEi5xxAblix5dGG5VOKy3XNcDznam/n+x+/e6XnkhobxTG2AwmSEqW8dKapx23Pcly7JFU2a8acpoXLKKXtJ47GzQQg7Hx2d0vTKgDZ33+tq+dy3MxrbFjTfePKxc6zumpwyce7IgnS813DzP/05Afvtb1dU1H74nO7iydPaZzXfPzUR45rb1y9taVpVejZx04cOXD0nTAMEHFOZZ2iKLqmCykm1gARCaVe4N1N/3ZJXrRdq1Q1IhYyzhJmXkvDcsmivtu9+9r2Cil03RBC/nTlHEGiqfp4Gowk4FEwe+bcTWu21lYtmFY6PTNw6/NvP5Egk3kFk/ILkdKunkt+6OXFk5wzADA0U943xcQEhJAw8Bprm5sWrQNuBZ69v23v6QsdCTMfQCISAGCcwQj7S/g7cyCEUPX4N+e+emPPCz93nlWU2JZ126orasMocDzb9SwpxLSSGQQJgKSEUkI551EUPjgKf0IgBaXK9b6rbccPvXXg9aw1WFRUtnH1VgDI2IMXOs8iIZXTq1cuWZ/ODFhOZtBKm0a8rLiccYaAExPkimKxWElRWW9/95fftYMUjfOa51TWCSEOtx/s7esy4snnn9750vbXNq/dtn3zzjdf3r+0cYXr2WNmfrwsklIyFhm6eayj7bFFrami0vXLnrrc/WM6c+fVPbue2bBjQU3T4y1PAsZAhFbmbveNX2KKOkZnfOCTiZTSVEExJYrtZjLWICGEc5YqKDF0Uwh+685NAGCcRVE4tWR6SVGZquq2m+3tv2a7lhrTYLSXRhEQQv3ARURCqJSScw4Ahm4goB96nu8auplzuh94mqoLISIWeb6jUCURz6dUCUKfc2bocSlEzlf37gsRueAZK11ZXl02eZrnu0HglaamzJ4513KyGTtt6PGm+S0ESdbO+KFfW7VQjWme73DB6msaK8qrbNcazA6kCopnV8zL2oOMRzlH5TpAIbmpx1cuWZ8w8xSqXOvrYpzPmlHNWGQ52ev93fXVi/wwUAg5f/lMbVU9INFV7WLnmdLU1MJkihIyBImiMAj99lMfWnaGEqoAACJwxgqTqZu3ezt++ExV9dbFTxgxdV/bXsezF9cvrSivOnL80I1b12sq5z9St/T0+Y7c1q3Na2/+2nO4/aCqaiMgVktDa2rS5HTmLqX0ngaIGLEojIKEmSeEcDwbAEwjTgl1PYfxyNBMVdU93w1DX1U1QzfDKPR8lxIaNxJCjoQojmspSkyNqVLKYZEREQFzWZjzshACABAJIuZEQ0REIqWQUgIgIQSkfBBCkAzl0vAcSCmH8iRXd/+9GHKdlFIOZ70UYjj3R0JGJvb//7flIcGE63cCMIqB+qx/4QAAAABJRU5ErkJggg==">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<meta name="theme-color" content="#55692E">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Rough Cut">
+<meta name="mobile-web-app-capable" content="yes">
+<style>
+  :root{
+    --bg:#ECE6D4;
+    --surface:#F7F3E7;
+    --surface-2:#EFE7CE;
+    --border:#C6BB98;
+    --border-soft:#DBD1AE;
+    --text:#2B2E22;
+    --text-dim:#5A5D48;
+    --text-faint:#8A8C73;
+    --rust:#55692E;
+    --rust-soft:#3A4A1F;
+    --teal:#52696C;
+    --teal-soft:#3B4C4E;
+    --amber:#93701F;
+    --amber-soft:#6B5216;
+    --on-accent:#F5F0DF;
+    --sage:#7A9F66;
+    --sage-dark:#3D5A34;
+    --bronze:#8B7442;
+    --bronze-dark:#4A3B1E;
+  }
+
+  *{box-sizing:border-box;}
+  html{-webkit-font-smoothing:antialiased;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(85,105,46,0.09), transparent 60%),
+      radial-gradient(1000px 500px at 100% 0%, rgba(82,105,108,0.08), transparent 55%),
+      var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    min-height:100vh;
+  }
+
+  :focus-visible{
+    outline:2px solid var(--amber);
+    outline-offset:2px;
+  }
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 20px 80px;
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    padding:44px 0 30px;
+    border-bottom:1px solid var(--border-soft);
+    margin-bottom:28px;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--rust);
+    margin:0 0 10px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;
+    height:1px;
+    background:var(--rust);
+    display:inline-block;
+  }
+  h1{
+    font-family:'Oswald', sans-serif;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.01em;
+    font-size:clamp(44px, 8.0vw, 74px);
+    line-height:.95;
+    margin:0 0 14px;
+  }
+  h1 span{color:var(--teal);}
+  .tagline{
+    max-width:520px;
+    color:var(--text-dim);
+    font-size:18px;
+    line-height:1.55;
+    margin:0;
+  }
+  .stat-row{
+    display:flex;
+    gap:28px;
+    margin-top:26px;
+    flex-wrap:wrap;
+  }
+  .stat{
+    font-family:'JetBrains Mono', monospace;
+  }
+  .stat .num{
+    font-size:26.5px;
+    font-weight:700;
+    color:var(--text);
+    display:block;
+  }
+  .stat .lab{
+    font-size:12px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+  }
+
+  /* ---------- FILTER BAR ---------- */
+  .filters{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:rgba(236,230,212,0.96);
+    backdrop-filter:blur(8px);
+    border:1px solid var(--border-soft);
+    border-radius:14px;
+    margin-bottom:26px;
+    overflow:hidden;
+  }
+  .filters-toggle{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:16px 20px;
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+  }
+  .ft-left{display:flex; align-items:center; gap:10px;}
+  .ft-icon{
+    font-family:'JetBrains Mono', monospace;
+    font-size:15.5px;
+    color:var(--rust);
+    display:inline-block;
+    transition:transform .2s ease;
+  }
+  .filters.open .ft-icon{transform:rotate(180deg);}
+  .ft-label{
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    font-size:18px;
+    font-weight:600;
+  }
+  .ft-count{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    font-weight:700;
+    background:var(--rust-soft);
+    color:var(--on-accent);
+    border-radius:100px;
+    padding:2px 8px;
+    min-width:20px;
+    text-align:center;
+  }
+  .ft-hint{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+  }
+  .filters-body{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .25s ease;
+    display:flex;
+    flex-direction:column;
+  }
+  .filters.open .filters-body{max-height:min(72vh, 620px);}
+  .filters-body-inner{
+    padding:2px 20px 14px;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    flex:1;
+    min-height:0;
+  }
+  .filter-group{margin-bottom:14px;}
+  .filter-group:last-child{margin-bottom:0;}
+  .filter-head{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:9px;
+  }
+  .filter-head .dot{
+    width:6px;height:6px;border-radius:50%;
+    background:var(--text-faint);
+  }
+  .filter-title{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+  }
+  .chip-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    align-items:center;
+  }
+  .chip{
+    font-family:'Inter', sans-serif;
+    font-size:15.5px;
+    font-weight:500;
+    color:var(--text-dim);
+    background:var(--surface-2);
+    border:1px solid var(--border);
+    padding:9px 16px;
+    border-radius:100px;
+    cursor:pointer;
+    transition:border-color .15s ease, color .15s ease, background .15s ease;
+    line-height:1.2;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .chip:hover{border-color:var(--text-faint); color:var(--text);}
+  .chip.active{
+    background:var(--rust-soft);
+    border-color:var(--rust);
+    color:var(--on-accent);
+  }
+  .chip.chip-custom{border-style:dashed;}
+  .chip-x{
+    font-size:15.5px;
+    line-height:1;
+    color:var(--text-faint);
+    padding:0 1px;
+  }
+  .chip-x:hover{color:var(--rust);}
+  .chip.active .chip-x{color:var(--on-accent);}
+
+  .chip-add{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    margin-top:9px;
+  }
+  .chip-add input{
+    font-family:'Inter', sans-serif;
+    font-size:15.5px;
+    background:var(--bg);
+    border:1px solid var(--border);
+    color:var(--text);
+    padding:7px 11px;
+    border-radius:100px;
+    width:150px;
+    max-width:50vw;
+  }
+  .chip-add input::placeholder{color:var(--text-faint);}
+  .chip-add input:focus{border-color:var(--teal);}
+  .chip-add button{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--teal);
+    background:var(--teal-soft);
+    border:1px solid var(--teal);
+    padding:7px 12px;
+    border-radius:100px;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .chip-add button:hover{color:var(--on-accent);}
+  .chip-add-hint{
+    font-size:13px;
+    color:var(--text-faint);
+    margin-top:5px;
+  }
+  .filter-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+    padding:14px 20px 18px;
+    border-top:1px solid var(--border-soft);
+    background:var(--surface);
+    flex-shrink:0;
+  }
+  .filter-footer-btns{
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .result-count{
+    font-family:'JetBrains Mono', monospace;
+    font-size:14.5px;
+    color:var(--text-dim);
+  }
+  .result-count b{color:var(--teal);}
+  .clear-btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+    background:none;
+    border:1px solid var(--border);
+    padding:7px 12px;
+    border-radius:8px;
+    cursor:pointer;
+    transition:color .15s ease, border-color .15s ease;
+  }
+  .clear-btn:hover{color:var(--text); border-color:var(--text-faint);}
+  .done-btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--on-accent);
+    background:var(--rust-soft);
+    border:1px solid var(--rust);
+    padding:7px 14px;
+    border-radius:8px;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+  }
+  .done-btn:hover{background:var(--rust);}
+  .ft-icon-up{font-size:12px;}
+
+  /* ---------- GENERATOR ---------- */
+  .generator{
+    background:linear-gradient(160deg, rgba(85,105,46,0.09), rgba(82,105,108,0.07));
+    border:1px solid var(--border-soft);
+    border-radius:14px;
+    padding:22px;
+    margin-bottom:34px;
+  }
+  .generator-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+  .generator-head h2{
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
+    font-size:26.5px;
+    margin:0 0 6px;
+    color:var(--text);
+  }
+  .generator-head p{
+    font-size:15.5px;
+    color:var(--text-dim);
+    max-width:420px;
+    margin:0;
+    line-height:1.5;
+  }
+  .generate-btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size:15.5px;
+    font-weight:700;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    color:var(--on-accent);
+    background:var(--rust);
+    border:none;
+    padding:14px 22px;
+    border-radius:10px;
+    cursor:pointer;
+    white-space:nowrap;
+    flex-shrink:0;
+  }
+  .generate-btn:hover{background:var(--rust-soft);}
+  #generatedArea{margin-top:18px;}
+  #generatedArea .card{margin:0;}
+
+  .gen-ribbon{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--amber);
+    background:rgba(147,112,31,0.1);
+    border:1px dashed var(--amber-soft);
+    border-radius:6px;
+    padding:6px 10px;
+    display:inline-block;
+    width:fit-content;
+  }
+  .gen-note{
+    font-size:14px;
+    color:var(--text-faint);
+    font-style:italic;
+    line-height:1.5;
+    margin-top:-6px;
+  }
+  .gen-source{
+    font-size:14.5px;
+    color:var(--teal);
+    line-height:1.4;
+    margin-top:-6px;
+  }
+  .card-generated{border-color:var(--amber);}
+
+  .gen-loading{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:24px 20px;
+    border:1px dashed var(--border);
+    border-radius:12px;
+    color:var(--text-dim);
+    font-size:16px;
+  }
+  .spinner{
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    border:2px solid rgba(147,112,31,0.25);
+    border-top-color:var(--amber);
+    display:inline-block;
+    flex-shrink:0;
+    animation:spin .7s linear infinite;
+  }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce){
+    .spinner{animation:none; border-top-color:rgba(147,112,31,0.25);}
+  }
+  .generate-btn:disabled{
+    opacity:.75;
+    cursor:default;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .generate-btn:disabled .spinner{border-color:rgba(245,240,223,0.3); border-top-color:var(--on-accent);}
+
+  .btn-row{
+    display:flex;
+    gap:8px;
+  }
+  .btn-row .log-btn, .btn-row .regen-btn{flex:1;}
+  .regen-btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+    background:var(--surface-2);
+    border:1px solid var(--border);
+    padding:13px 14px;
+    border-radius:10px;
+    cursor:pointer;
+  }
+  .regen-btn:hover{border-color:var(--amber); color:var(--amber);}
+
+  .scale-row{
+    display:flex;
+    gap:8px;
+  }
+  .scale-btn{
+    flex:1;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding:13px 14px;
+    border-radius:10px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    transition:background .15s ease, color .15s ease;
+  }
+  .harder-btn{
+    background:rgba(147,112,31,0.1);
+    border:1px solid var(--amber);
+    color:var(--amber-soft);
+  }
+  .harder-btn:hover{background:var(--amber); color:var(--on-accent);}
+  .easier-btn{
+    background:rgba(82,105,108,0.1);
+    border:1px solid var(--teal);
+    color:var(--teal-soft);
+  }
+  .easier-btn:hover{background:var(--teal); color:var(--on-accent);}
+  .scale-note{
+    font-size:13.5px;
+    color:var(--text-dim);
+    font-style:italic;
+    line-height:1.45;
+    margin-top:-6px;
+  }
+  .scale-note.harder{color:var(--amber-soft);}
+  .scale-note.easier{color:var(--teal-soft);}
+  .reset-btn{
+    background:none;
+    border:none;
+    padding:0;
+    margin-left:4px;
+    font-family:'Inter', sans-serif;
+    font-size:13px;
+    font-style:normal;
+    font-weight:600;
+    text-decoration:underline;
+    text-underline-offset:2px;
+    color:var(--text-faint);
+    cursor:pointer;
+  }
+  .reset-btn:hover{color:var(--text);}
+
+  .signature-head{margin-bottom:16px;}
+  .signature-head h2{
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
+    font-size:24px;
+    margin:0 0 4px;
+    color:var(--text);
+  }
+  .signature-head p{
+    font-size:15px;
+    color:var(--text-faint);
+    margin:0;
+  }
+
+  /* ---------- GRID ---------- */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(360px, 1fr));
+    gap:20px;
+  }
+
+  .card{
+    background:var(--surface);
+    border:1px solid var(--border-soft);
+    border-radius:16px;
+    padding:26px;
+    display:flex;
+    flex-direction:column;
+    gap:17px;
+  }
+  .card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:10px;
+  }
+  .badge{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    padding:6px 12px;
+    border-radius:6px;
+    border:1px solid;
+    white-space:nowrap;
+  }
+  .badge-strength{color:var(--bronze-dark); border-color:var(--bronze); background:rgba(139,116,66,0.14);}
+  .badge-metcon{color:var(--teal-soft); border-color:var(--teal); background:rgba(82,105,108,0.12);}
+  .badge-emom{color:var(--amber-soft); border-color:var(--amber); background:rgba(147,112,31,0.14);}
+  .badge-amrap{color:var(--rust-soft); border-color:var(--rust); background:rgba(85,105,46,0.13);}
+  .badge-hybrid{color:var(--text-dim); border-color:var(--border); background:var(--surface-2);}
+  .badge-recovery{color:var(--sage-dark); border-color:var(--sage); background:rgba(122,159,102,0.16);}
+
+  .duration-chip{
+    font-family:'JetBrains Mono', monospace;
+    font-size:14.5px;
+    color:var(--text-dim);
+    white-space:nowrap;
+  }
+
+  .card h3{
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
+    font-size:26.5px;
+    font-weight:600;
+    letter-spacing:.01em;
+    margin:0;
+    line-height:1.1;
+  }
+
+  .load{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .load-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+    white-space:nowrap;
+  }
+  .load-bar{
+    display:flex;
+    gap:3px;
+    flex:1;
+  }
+  .load-seg{
+    height:7px;
+    flex:1;
+    border-radius:4px;
+    background:var(--border);
+  }
+  .load-seg.on-low{background:var(--teal);}
+  .load-seg.on-mod{background:var(--amber);}
+  .load-seg.on-high{background:var(--rust);}
+  .load-word{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    font-weight:700;
+    white-space:nowrap;
+  }
+  .load-word.low{color:var(--teal);}
+  .load-word.mod{color:var(--amber);}
+  .load-word.high{color:var(--rust);}
+
+  .stamps{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+  }
+  .stamp{
+    width:38px;height:38px;
+    border-radius:50%;
+    border:1.5px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    font-weight:700;
+    color:var(--text-dim);
+    background:var(--surface-2);
+    flex-shrink:0;
+  }
+
+  .movement-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+  }
+  .mv-tag{
+    font-size:13px;
+    color:var(--text-faint);
+    border:1px solid var(--border-soft);
+    padding:3px 9px;
+    border-radius:100px;
+  }
+
+  .desc{
+    font-size:16px;
+    line-height:1.55;
+    color:var(--text-dim);
+    margin:0;
+  }
+
+  .work-block{
+    background:var(--surface-2);
+    border:1px solid var(--border-soft);
+    border-radius:12px;
+    padding:18px 20px;
+  }
+  .work-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:10px;
+    margin-bottom:10px;
+    flex-wrap:wrap;
+  }
+  .work-title{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--rust);
+    font-weight:700;
+  }
+  .work-scheme{
+    font-size:14px;
+    color:var(--text-faint);
+    font-style:italic;
+  }
+  .work-list{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+  }
+  .work-row{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+  }
+  .work-num{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    font-weight:700;
+    color:var(--bg);
+    background:var(--teal);
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+    margin-top:1px;
+  }
+  .work-text{
+    font-size:15px;
+    line-height:1.5;
+    color:var(--text-dim);
+  }
+  .work-text b{
+    color:var(--text);
+    font-weight:600;
+    font-size:15.5px;
+  }
+
+  .note{
+    font-size:15px;
+    line-height:1.55;
+    padding:14px 16px;
+    border-radius:10px;
+    border-left:3px solid;
+  }
+  .note-coach{
+    background:rgba(85,105,46,0.08);
+    border-color:var(--rust);
+    color:var(--text-dim);
+  }
+  .note-coach b{color:var(--rust-soft); font-weight:600;}
+  .note-recover{
+    background:rgba(82,105,108,0.08);
+    border-color:var(--teal);
+    color:var(--text-dim);
+  }
+  .note-recover b{color:var(--teal-soft); font-weight:600;}
+
+  .log-btn{
+    margin-top:2px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--text);
+    background:var(--surface-2);
+    border:1px solid var(--border);
+    padding:13px 16px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:border-color .15s ease, background .15s ease, color .15s ease;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+  }
+  .log-btn:hover{border-color:var(--teal); color:var(--teal-soft);}
+  .log-btn.logged{
+    background:var(--teal-soft);
+    border-color:var(--teal);
+    color:var(--on-accent);
+    cursor:default;
+  }
+  .log-btn .tick{
+    font-weight:700;
+    color:var(--teal);
+  }
+  .log-btn.logged .tick{color:var(--on-accent);}
+
+  .empty{
+    grid-column:1/-1;
+    text-align:center;
+    padding:70px 20px;
+    border:1px dashed var(--border);
+    border-radius:14px;
+  }
+  .empty h4{
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
+    font-size:24px;
+    margin:0 0 8px;
+    color:var(--text);
+  }
+  .empty p{
+    color:var(--text-dim);
+    font-size:17px;
+    margin:0 0 18px;
+  }
+
+  /* ---------- TRAINING LOG ---------- */
+  .log-panel{
+    margin-top:56px;
+    padding-top:36px;
+    border-top:1px solid var(--border-soft);
+  }
+  .log-panel-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:14px;
+    margin-bottom:22px;
+  }
+  .log-panel-head h2{
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
+    font-size:clamp(28px, 4.6vw, 37px);
+    margin:0 0 8px;
+    color:var(--rust);
+  }
+  .log-panel-head p{
+    color:var(--text-dim);
+    font-size:17px;
+    max-width:520px;
+    margin:0;
+    line-height:1.55;
+  }
+
+  .week-summary{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    background:var(--surface);
+    border:1px solid var(--border-soft);
+    border-radius:12px;
+    padding:16px 20px;
+    margin-bottom:18px;
+  }
+  .week-stat{font-family:'JetBrains Mono', monospace;}
+  .week-stat .w-num{
+    font-size:24px;
+    font-weight:700;
+    display:block;
+  }
+  .week-stat .w-lab{
+    font-size:12px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+  }
+  .week-warn{
+    display:flex;
+    align-items:center;
+    font-size:15px;
+    color:var(--amber);
+    border-left:2px solid var(--amber);
+    padding-left:12px;
+    line-height:1.4;
+    flex:1;
+    min-width:220px;
+  }
+
+  .log-list{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .log-entry{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    background:var(--surface);
+    border:1px solid var(--border-soft);
+    border-radius:10px;
+    padding:12px 16px;
+  }
+  .log-entry .le-date{
+    font-family:'JetBrains Mono', monospace;
+    font-size:14px;
+    color:var(--text-faint);
+    width:78px;
+    flex-shrink:0;
+  }
+  .log-entry .le-title{
+    font-family:'Oswald', sans-serif;
+    font-size:18px;
+    text-transform:uppercase;
+    flex:1;
+    min-width:120px;
+  }
+  .log-entry .le-meta{
+    display:flex;
+    gap:8px;
+    align-items:center;
+    flex-shrink:0;
+  }
+  .le-del{
+    background:none;
+    border:none;
+    color:var(--text-faint);
+    cursor:pointer;
+    font-size:19px;
+    line-height:1;
+    padding:4px 6px;
+    border-radius:6px;
+    flex-shrink:0;
+  }
+  .le-del:hover{color:var(--rust); background:rgba(85,105,46,0.1);}
+
+  .log-empty{
+    text-align:center;
+    padding:40px 20px;
+    border:1px dashed var(--border);
+    border-radius:12px;
+    color:var(--text-dim);
+    font-size:16px;
+  }
+  .log-empty span{display:block; margin-bottom:12px;}
+
+  .log-status{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--text-faint);
+    margin-top:10px;
+  }
+
+  /* ---------- RECOVERY PANEL ---------- */
+  .recovery-panel{
+    margin-top:56px;
+    padding-top:36px;
+    border-top:1px solid var(--border-soft);
+  }
+  .panel-head{
+    margin-bottom:22px;
+  }
+  .panel-head h2{
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
+    font-size:clamp(28px, 4.6vw, 37px);
+    margin:0 0 8px;
+    color:var(--teal);
+  }
+  .panel-head p{
+    color:var(--text-dim);
+    font-size:17px;
+    max-width:560px;
+    margin:0;
+    line-height:1.55;
+  }
+  .panel-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:14px;
+  }
+  .panel-card{
+    background:var(--surface);
+    border:1px solid var(--border-soft);
+    border-radius:12px;
+    padding:18px;
+  }
+  .panel-card .p-lab{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--teal);
+    margin-bottom:8px;
+  }
+  .panel-card .p-val{
+    font-family:'Oswald', sans-serif;
+    font-size:23px;
+    margin-bottom:6px;
+  }
+  .panel-card .p-sub{
+    font-size:15px;
+    color:var(--text-dim);
+    line-height:1.5;
+    margin:0;
+  }
+
+  footer{
+    margin-top:50px;
+    text-align:center;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--text-faint);
+    letter-spacing:.05em;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;}
+  }
+
+  @media (max-width:600px){
+    .filters{border-radius:10px;}
+    .stat-row{gap:20px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Strength &amp; Conditioning — Est. for Athletes 40+</p>
+    <h1>ROUGH<span> CUT</span></h1>
+    <p class="tagline">Strength and conditioning for people who are still being shaped — rough around the edges, solid at the core. Scaled with judgment, not just intensity.</p>
+    <div class="stat-row">
+      <div class="stat"><span class="num">68</span><span class="lab">Movements in the shop</span></div>
+      <div class="stat"><span class="num" id="statTotal">16</span><span class="lab">Signature sessions</span></div>
+      <div class="stat"><span class="num">6</span><span class="lab">Styles</span></div>
+      <div class="stat"><span class="num">13</span><span class="lab">Equipment types</span></div>
+    </div>
+  </header>
+
+  <div class="filters" id="filtersPanel">
+    <button class="filters-toggle" id="filtersToggle" aria-expanded="false" aria-controls="filtersBody" type="button">
+      <span class="ft-left">
+        <span class="ft-icon">▾</span>
+        <span class="ft-label">Filters</span>
+        <span class="ft-count" id="ftCount" hidden>0</span>
+      </span>
+      <span class="ft-hint" id="ftHint">Tap to expand</span>
+    </button>
+    <div class="filters-body" id="filtersBody">
+      <div class="filters-body-inner">
+        <div class="filter-group">
+          <div class="filter-head"><span class="dot"></span><span class="filter-title">Equipment on hand</span></div>
+          <div class="chip-row" id="equipmentChips"></div>
+          <div class="chip-add">
+            <input type="text" id="equipmentInput" placeholder="Add equipment…" maxlength="24" aria-label="Add equipment">
+            <button type="button" id="equipmentAddBtn">Add</button>
+          </div>
+          <p class="chip-add-hint">Custom tags won't match existing sessions yet — handy for planning ahead.</p>
+        </div>
+        <div class="filter-group">
+          <div class="filter-head"><span class="dot"></span><span class="filter-title">Movement pattern</span></div>
+          <div class="chip-row" id="movementChips"></div>
+          <div class="chip-add">
+            <input type="text" id="movementInput" placeholder="Add movement…" maxlength="24" aria-label="Add movement pattern">
+            <button type="button" id="movementAddBtn">Add</button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <div class="filter-head"><span class="dot"></span><span class="filter-title">Time available</span></div>
+          <div class="chip-row" id="durationChips"></div>
+        </div>
+        <div class="filter-group">
+          <div class="filter-head"><span class="dot"></span><span class="filter-title">Workout style</span></div>
+          <div class="chip-row" id="styleChips"></div>
+        </div>
+      </div>
+      <div class="filter-footer">
+        <span class="result-count"><b id="resultCount">16</b> sessions match</span>
+        <div class="filter-footer-btns">
+          <button class="clear-btn" id="clearBtn">Clear filters</button>
+          <button class="done-btn" id="doneBtn" type="button">Done <span class="ft-icon-up">▴</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="generator">
+    <div class="generator-head">
+      <div>
+        <h2>Generate a WOD</h2>
+        <p>Builds a session on the spot from whatever's checked above — every movement actually pulled from your selected equipment, not searched from a fixed list. Leave filters empty for a fully open cut.</p>
+      </div>
+      <button class="generate-btn" id="generateBtn" type="button">Cut One</button>
+    </div>
+    <div id="generatedArea"></div>
+  </div>
+
+  <div class="signature-head">
+    <h2>Signature Sessions</h2>
+    <p>16 curated, hand-written WODs — filter the same way as above.</p>
+  </div>
+  <div class="grid" id="grid"></div>
+
+  <div class="log-panel">
+    <div class="log-panel-head">
+      <div>
+        <h2>Your Training Log</h2>
+        <p>Tap "Log this session" on any card when you finish it. Kept on this device so you can see what the last week actually looked like — not just what it felt like.</p>
+      </div>
+    </div>
+
+    <div id="weekSummary"></div>
+    <div class="log-list" id="logList"></div>
+    <div class="log-status" id="logStatus"></div>
+  </div>
+
+  <div class="recovery-panel">
+    <div class="panel-head">
+      <h2>Recovery &amp; Fueling</h2>
+      <p>The training gets you the stimulus. What you do in the hours after is what lets you show up again in two days instead of five.</p>
+    </div>
+    <div class="panel-grid">
+      <div class="panel-card">
+        <div class="p-lab">Protein window</div>
+        <div class="p-val">30–40g</div>
+        <p class="p-sub">Within about 60–90 minutes post-session. Muscle protein synthesis slows with age, so this window matters more at 40+ than it did at 25.</p>
+      </div>
+      <div class="panel-card">
+        <div class="p-lab">Hydration</div>
+        <div class="p-val">½–¾ oz / lb bodyweight</div>
+        <p class="p-sub">Daily baseline, more on high-sweat conditioning days. Add electrolytes on anything over 40 minutes of sustained work.</p>
+      </div>
+      <div class="panel-card">
+        <div class="p-lab">Joint care</div>
+        <div class="p-val">Move before you load</div>
+        <p class="p-sub">Ten minutes of controlled range-of-motion work before high joint-load sessions does more for longevity than any supplement.</p>
+      </div>
+      <div class="panel-card">
+        <div class="p-lab">Sleep</div>
+        <div class="p-val">7–9 hrs</div>
+        <p class="p-sub">The main recovery driver you actually control. Strength adaptation and connective tissue repair both lean on it heavily.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>Rough Cut — training built for the long haul</footer>
+</div>
+
+<script>
+const WORKOUTS = [
+  {
+    title:"Iron Foundation",
+    style:"Strength",
+    duration:"35–50",
+    equipment:["Barbell","Bench"],
+    movement:["Squat","Hinge","Push"],
+    load:2,
+    desc:"Back squat, bench press, and Romanian deadlift across five working sets. Straightforward strength work, built around bar speed instead of grinding singles.",
+    scheme:"Straight sets, full rest between",
+    work:[
+      {move:"Back Squat", detail:"5 sets × 5 reps @ 65–75% 1RM"},
+      {move:"Bench Press", detail:"5 sets × 5 reps @ 60–70% 1RM"},
+      {move:"Romanian Deadlift", detail:"3 sets × 8 reps, RPE 6 — moderate, hip-hinge focus"}
+    ],
+    coach:"Stop two clean reps shy of failure on every set. The goal is strength on the books, not strength you paid for tomorrow.",
+    recover:"30g protein within the hour, then a 10-minute walk to keep blood moving through the low back."
+  },
+  {
+    title:"Engine Room",
+    style:"Metcon",
+    duration:"20–35",
+    equipment:["Rower","Jump Rope"],
+    movement:["Locomotion","Core"],
+    load:1,
+    desc:"Alternating rower intervals and steady jump rope, holding a conversational-minus-one pace. Builds aerobic base without pounding a single joint.",
+    scheme:"6 rounds, 60-sec rest between rounds",
+    work:[
+      {move:"Row", detail:"400m @ steady, conversational-minus-one pace"},
+      {move:"Jump Rope", detail:"90 seconds @ steady, unhurried singles"}
+    ],
+    coach:"This is the session to leave something in the tank on. Aerobic base is built over months, not in one heroic Tuesday.",
+    recover:"Easy 5-minute spin-down. No need for extra protein here — hydration is the priority."
+  },
+  {
+    title:"Farmer's Grind",
+    style:"Hybrid",
+    duration:"20–35",
+    equipment:["Kettlebell","Dumbbell"],
+    movement:["Carry","Hinge","Pull"],
+    load:2,
+    desc:"Loaded carries paired with kettlebell swings and single-arm rows, four rounds for quality. Grip, posture, and hip drive all get a turn.",
+    scheme:"4 rounds, rest 90 sec between rounds",
+    work:[
+      {move:"Kettlebell Swings", detail:"15 reps, moderate KB — RPE 6"},
+      {move:"Single-Arm DB Row", detail:"10 reps per side, controlled tempo"},
+      {move:"Farmer's Carry", detail:"40m, heaviest KB or DB pair you can hold with a tall spine"}
+    ],
+    coach:"Brace before you pick anything up. A carry with a rounded low back is just a slow way to hurt yourself.",
+    recover:"Grip and forearms will be cooked — a few minutes of wrist and forearm stretching pays off tomorrow."
+  },
+  {
+    title:"Ten Round War",
+    style:"EMOM",
+    duration:"Under 20",
+    equipment:["Dumbbell","Bodyweight"],
+    movement:["Push","Pull","Core"],
+    load:2,
+    desc:"Every minute on the minute for 10 rounds: dumbbell push press, renegade rows, hollow hold. Short, dense, and over before it gets ugly.",
+    scheme:"EMOM × 10 — complete all three, rest what's left in the minute",
+    work:[
+      {move:"DB Push Press", detail:"6 reps, moderate load"},
+      {move:"Renegade Rows", detail:"3 reps per side"},
+      {move:"Hollow Hold", detail:"20 seconds"}
+    ],
+    coach:"If you're regularly finishing with 20+ seconds of rest, the load is too light. If you're never resting, it's too heavy — EMOMs live in the middle.",
+    recover:"Shoulders take the brunt here. Ice or a brief cold rinse if they're cranky, then normal protein timing."
+  },
+  {
+    title:"Ground Force",
+    style:"AMRAP",
+    duration:"20–35",
+    equipment:["Bodyweight"],
+    movement:["Squat","Push","Core"],
+    load:1,
+    desc:"As many rounds as possible in 18 minutes: air squats, push-ups, plank shoulder taps. Nothing loaded, everything honest.",
+    scheme:"AMRAP 18 minutes",
+    work:[
+      {move:"Air Squats", detail:"10 reps"},
+      {move:"Push-Ups", detail:"8 reps — scale to incline as needed"},
+      {move:"Plank Shoulder Taps", detail:"12 reps total, alternating"}
+    ],
+    coach:"Scale reps before you scale range of motion. A shorter set of full push-ups beats a longer set of half ones.",
+    recover:"Low systemic load — a normal meal is fine, no rush on the protein clock."
+  },
+  {
+    title:"Anchor & Drift",
+    style:"Recovery/Mobility",
+    duration:"Under 20",
+    equipment:["Bands","Bodyweight"],
+    movement:["Rotation","Core"],
+    load:1,
+    desc:"Band-resisted rotations, 90/90 hip switches, and controlled breathing holds. Built for the day after something heavy.",
+    scheme:"3 unhurried rounds, no clock pressure",
+    work:[
+      {move:"Band-Resisted Rotations", detail:"10 reps per side, light band"},
+      {move:"90/90 Hip Switches", detail:"8 reps per side, slow and controlled"},
+      {move:"Box Breathing Hold", detail:"5 breaths — inhale 4, hold 4, exhale 4, hold 4"}
+    ],
+    coach:"This session should feel almost boring. If it's challenging, you're moving too fast through the positions.",
+    recover:"This *is* the recovery session — follow with a normal meal and an early night if you can."
+  },
+  {
+    title:"The Long Haul",
+    style:"Strength",
+    duration:"50+",
+    equipment:["Barbell"],
+    movement:["Hinge","Squat"],
+    load:3,
+    desc:"Deadlift and front squat, working to a heavy triple across six total sets with full rest between. Old-school strength, no shortcuts on recovery between sets.",
+    scheme:"Straight sets, full 2–3 min rest between every set",
+    work:[
+      {move:"Deadlift", detail:"6 sets, build to a heavy triple around 80–85% 1RM (RPE 7–8)"},
+      {move:"Front Squat", detail:"4 sets × 5 reps @ 70–75% 1RM"}
+    ],
+    coach:"High joint load by design. Only program this the day after — or two days before — a full rest day, not sandwiched between hard conditioning.",
+    recover:"This is the one to actually prioritize: protein within the hour, extra hydration, and a lighter session tomorrow."
+  },
+  {
+    title:"Rower's Revenge",
+    style:"Metcon",
+    duration:"20–35",
+    equipment:["Rower"],
+    movement:["Locomotion","Core"],
+    load:1,
+    desc:"Five rounds of 500m row into 20 sit-ups, resting to full breath recovery between rounds. Repeatable pace over heroics.",
+    scheme:"5 rounds, rest until breathing settles between rounds",
+    work:[
+      {move:"Row", detail:"500m @ a split you could hold for all 5 rounds"},
+      {move:"Sit-Ups", detail:"20 reps, controlled — no need to rush"}
+    ],
+    coach:"Pick a 500m split you could hold for all five rounds. Going out too hot on round one is the most common way to wreck round four.",
+    recover:"Low-impact by nature — a normal recovery day, just keep the water moving."
+  },
+  {
+    title:"Odd Object Sunday",
+    style:"Hybrid",
+    duration:"35–50",
+    equipment:["Kettlebell","Plates"],
+    movement:["Carry","Hinge","Rotation"],
+    load:2,
+    desc:"Plate ground-to-overheads, kettlebell halos, and mixed-implement carries across a long, unhurried circuit. Builds the kind of strength that shows up moving furniture.",
+    scheme:"3 rounds, straight through — rest as needed between movements",
+    work:[
+      {move:"Plate Ground-to-Overhead", detail:"5 reps, moderate plate (~25–35 lb)"},
+      {move:"Kettlebell Halos", detail:"10 reps per side, light-moderate KB"},
+      {move:"Mixed Carry Medley", detail:"40m each implement — KB in one hand, plate hugged to the chest on the other side"}
+    ],
+    coach:"Uneven, off-center loads test grip and core more than a barbell ever will — pick a weight you can control, not just move.",
+    recover:"Core and grip fatigue are the signature here. A short mobility flow for the hips closes the loop well."
+  },
+  {
+    title:"Sprint & Stack",
+    style:"EMOM",
+    duration:"20–35",
+    equipment:["Jump Rope","Dumbbell"],
+    movement:["Locomotion","Push","Pull"],
+    load:2,
+    desc:"Alternating minutes of fast jump rope and dumbbell complexes for 24 minutes total. Conditioning and strength sharing the same clock.",
+    scheme:"EMOM × 24, alternating odd/even minutes",
+    work:[
+      {move:"Odd Minutes — Jump Rope", detail:"30–40 seconds fast, unbroken singles or double-unders, rest remainder of the minute"},
+      {move:"Even Minutes — DB Complex", detail:"5 cleans + 5 presses + 5 bent-over rows, moderate load"}
+    ],
+    coach:"The jump rope minutes should be genuinely fast — that's where the conditioning stimulus lives. Don't let them turn into a warm-up pace.",
+    recover:"Legs and lungs both get taxed. Prioritize carbohydrate alongside protein post-session to refill what the sprints burned."
+  },
+  {
+    title:"Bodyweight Bedrock",
+    style:"Strength",
+    duration:"35–50",
+    equipment:["Bodyweight"],
+    movement:["Squat","Push","Pull"],
+    load:1,
+    desc:"Tempo squats, ring or bar rows, and push-up progressions built for control rather than load. Strength work for a hotel room or a rest week.",
+    scheme:"4 rounds, straight through",
+    work:[
+      {move:"Tempo Squat", detail:"8 reps, 3-second lowering phase"},
+      {move:"Ring or Bar Row", detail:"8 reps, body angle set to make the last 2 reps hard"},
+      {move:"Push-Up Progression", detail:"max quality reps @ RPE 7 — stop before form breaks"}
+    ],
+    coach:"Slow the eccentric down to a true 3-count. Without external load, time under tension is where the strength stimulus comes from.",
+    recover:"Minimal joint load — an ordinary meal and normal hydration cover it."
+  },
+  {
+    title:"The Grinder",
+    style:"AMRAP",
+    duration:"35–50",
+    equipment:["Barbell","Kettlebell"],
+    movement:["Hinge","Push","Carry"],
+    load:3,
+    desc:"12-minute AMRAP of clean & jerks, kettlebell carries, and box step-ups, repeated after a rest for a second 12-minute effort.",
+    scheme:"AMRAP 12 → rest 4 min → AMRAP 12",
+    work:[
+      {move:"Clean & Jerk", detail:"5 reps, moderate barbell — technique over load"},
+      {move:"Kettlebell Carry", detail:"40m, heavy but controlled"},
+      {move:"Box Step-Ups", detail:"15 reps, alternating legs, knee-height box"}
+    ],
+    coach:"High joint load, long duration — the combination that catches people. Front-load your best effort in the first AMRAP and accept a modest drop-off in the second.",
+    recover:"Treat this like a hard training day, not a casual one: extra protein, extra water, and a genuine rest day to follow."
+  },
+  {
+    title:"Tempo Control",
+    style:"Strength",
+    duration:"20–35",
+    equipment:["Dumbbell","Bench"],
+    movement:["Push","Pull"],
+    load:1,
+    desc:"Dumbbell bench press and one-arm rows on a strict 4-1-1 tempo. Short session, but the slow eccentric makes it earn its keep.",
+    scheme:"4 sets of each, alternating — 4-1-1 tempo throughout",
+    work:[
+      {move:"DB Bench Press", detail:"8 reps @ 4-1-1 tempo, moderate load"},
+      {move:"One-Arm DB Row", detail:"8 reps per side @ 4-1-1 tempo"}
+    ],
+    coach:"Tempo work exposes weak positions fast. If a joint complains at the bottom of a rep, that's information — back off the range before you back off the load.",
+    recover:"Shoulders and elbows do the work here — a couple minutes of light banded distraction stretching helps."
+  },
+  {
+    title:"Reset Day",
+    style:"Recovery/Mobility",
+    duration:"20–35",
+    equipment:["Bands","Bodyweight"],
+    movement:["Rotation","Hinge"],
+    load:1,
+    desc:"Hip flexor openers, banded hamstring work, and thoracic rotation drills, held long and breathed through rather than rushed.",
+    scheme:"2 unhurried rounds",
+    work:[
+      {move:"Hip Flexor Opener", detail:"45-second hold per side"},
+      {move:"Banded Hamstring Stretch", detail:"45-second hold per side, light band"},
+      {move:"Thoracic Rotation", detail:"8 slow reps per side"}
+    ],
+    coach:"Nothing here should be painful. Mild, sustained discomfort in a stretch is normal; sharp or pinching sensation means back off immediately.",
+    recover:"This session is the recovery tool itself — pair it with an early night for the biggest return."
+  },
+  {
+    title:"Conditioning Ladder",
+    style:"Metcon",
+    duration:"50+",
+    equipment:["Bodyweight","Dumbbell"],
+    movement:["Locomotion","Core","Push"],
+    load:2,
+    desc:"An ascending ladder of burpees, dumbbell thrusters, and shuttle runs, building one rep per round until the clock runs out.",
+    scheme:"Ascending ladder 1–10 — add one rep of each per rung, shuttle run stays constant",
+    work:[
+      {move:"Burpees", detail:"1 rep on rung 1, up to 10 reps on rung 10"},
+      {move:"DB Thrusters", detail:"1 rep on rung 1, up to 10 reps on rung 10 — light-moderate DBs"},
+      {move:"Shuttle Run", detail:"20m down-and-back after every rung"}
+    ],
+    coach:"Long conditioning pieces reward pacing discipline more than fitness. Walk into round one slower than feels necessary.",
+    recover:"Substantial aerobic and muscular fatigue — carbohydrate-forward meal, extra water, easy legs tomorrow."
+  },
+  {
+    title:"Heavy Carry Circuit",
+    style:"Hybrid",
+    duration:"Under 20",
+    equipment:["Kettlebell","Plates"],
+    movement:["Carry","Core"],
+    load:2,
+    desc:"Four short rounds of heavy suitcase carries and weighted-plate holds, resting fully between. Short on time, honest on load.",
+    scheme:"4 rounds, rest 90 sec between rounds",
+    work:[
+      {move:"Suitcase Carry", detail:"30m per side, heaviest KB you can hold upright"},
+      {move:"Plate Pinch Hold", detail:"30–45 seconds, plate pinched at chest, tall posture"}
+    ],
+    coach:"Brace hard and keep the ribcage stacked over the pelvis. This is a small window with real load — technique doesn't get to slip.",
+    recover:"Grip and core fatigue are the tell. A few minutes of forearm stretching and normal protein timing closes it out."
+  }
+];
+
+const EQUIPMENT_BASE = ["Bodyweight","Barbell","Dumbbell","Kettlebell","Bench","Pull-up Bar","Rower","Jump Rope","Slam Ball","Bands","Plates","Weighted Vest","Box"];
+const MOVEMENT_BASE = ["Squat","Hinge","Push","Pull","Carry","Rotation","Locomotion","Core"];
+const DURATION = ["Under 20","20–35","35–50","50+"];
+const STYLE = ["Strength","Metcon","EMOM","AMRAP","Hybrid","Recovery/Mobility"];
+
+let customEquipment = [];
+let customMovement = [];
+
+const state = { equipment:new Set(), movement:new Set(), duration:new Set(), style:new Set() };
+
+const stampAbbr = {
+  "Bodyweight":"BW","Barbell":"BB","Dumbbell":"DB","Kettlebell":"KB","Bench":"BN",
+  "Pull-up Bar":"PB","Rower":"RW","Jump Rope":"JR","Slam Ball":"SB",
+  "Bands":"BD","Plates":"PL","Weighted Vest":"WV","Box":"BX"
+};
+const styleClass = {
+  "Strength":"badge-strength","Metcon":"badge-metcon","EMOM":"badge-emom",
+  "AMRAP":"badge-amrap","Hybrid":"badge-hybrid","Recovery/Mobility":"badge-recovery"
+};
+const loadWord = {1:"Low",2:"Moderate",3:"High"};
+const loadClass = {1:"low",2:"mod",3:"high"};
+const loadSegClass = {1:"on-low",2:"on-mod",3:"on-high"};
+
+function buildChips(containerId, baseOptions, customOptions, stateKey){
+  const el = document.getElementById(containerId);
+  const all = [...baseOptions, ...customOptions];
+  el.innerHTML = all.map(opt=>{
+    const active = state[stateKey].has(opt);
+    const isCustom = customOptions.includes(opt);
+    const xHTML = isCustom ? `<span class="chip-x" data-remove-key="${stateKey}" data-remove-val="${opt}" title="Remove ${opt}">×</span>` : "";
+    return `<button class="chip ${active?'active':''} ${isCustom?'chip-custom':''}" data-key="${stateKey}" data-val="${opt}" type="button" aria-pressed="${active}">${opt}${xHTML}</button>`;
+  }).join("");
+}
+
+function rebuildAllChips(){
+  buildChips("equipmentChips", EQUIPMENT_BASE, customEquipment, "equipment");
+  buildChips("movementChips", MOVEMENT_BASE, customMovement, "movement");
+  buildChips("durationChips", DURATION, [], "duration");
+  buildChips("styleChips", STYLE, [], "style");
+}
+rebuildAllChips();
+
+function updateFilterCount(){
+  const total = state.equipment.size + state.movement.size + state.duration.size + state.style.size;
+  const badge = document.getElementById("ftCount");
+  badge.hidden = total === 0;
+  badge.textContent = total;
+}
+
+// single delegated listener covers chip toggles + custom-chip removal,
+// including chips added after the initial render
+document.getElementById("filtersBody").addEventListener("click", (e)=>{
+  const xBtn = e.target.closest(".chip-x");
+  if(xBtn){
+    e.stopPropagation();
+    removeCustomTag(xBtn.dataset.removeKey, xBtn.dataset.removeVal);
+    return;
+  }
+  const chip = e.target.closest(".chip");
+  if(chip){
+    const key = chip.dataset.key;
+    const val = chip.dataset.val;
+    if(state[key].has(val)) state[key].delete(val);
+    else state[key].add(val);
+    rebuildAllChips();
+    updateFilterCount();
+    render();
+  }
+});
+
+document.getElementById("clearBtn").addEventListener("click", ()=>{
+  Object.keys(state).forEach(k=>state[k].clear());
+  rebuildAllChips();
+  updateFilterCount();
+  render();
+});
+
+/* ---- collapsible toggle ---- */
+const filtersPanel = document.getElementById("filtersPanel");
+const filtersToggle = document.getElementById("filtersToggle");
+
+function setFiltersOpen(open){
+  filtersPanel.classList.toggle("open", open);
+  filtersToggle.setAttribute("aria-expanded", open ? "true" : "false");
+  document.getElementById("ftHint").textContent = open ? "Tap to collapse" : "Tap to expand";
+}
+
+filtersToggle.addEventListener("click", ()=>{
+  setFiltersOpen(!filtersPanel.classList.contains("open"));
+});
+
+document.getElementById("doneBtn").addEventListener("click", ()=>{
+  setFiltersOpen(false);
+  filtersToggle.scrollIntoView({block:"start"});
+});
+
+/* ---- storage adapter: uses Claude's window.storage when available,
+   falls back to plain localStorage so the file also works standalone ---- */
+const hasClaudeStorage = typeof window.storage !== "undefined" && window.storage && typeof window.storage.get === "function";
+
+async function storageGet(key){
+  if(hasClaudeStorage){
+    try{ return await window.storage.get(key, false); }catch(err){ return null; }
+  }
+  try{
+    const raw = localStorage.getItem(key);
+    return raw !== null ? { key, value: raw, shared:false } : null;
+  }catch(err){ return null; }
+}
+
+async function storageSet(key, value){
+  if(hasClaudeStorage){
+    try{ return await window.storage.set(key, value, false); }catch(err){ return null; }
+  }
+  try{
+    localStorage.setItem(key, value);
+    return { key, value, shared:false };
+  }catch(err){ return null; }
+}
+
+/* ---- custom equipment / movement tags ---- */
+async function loadCustomTags(){
+  try{
+    const eq = await storageGet("custom-equipment-tags");
+    customEquipment = eq && eq.value ? JSON.parse(eq.value) : [];
+  }catch(err){ customEquipment = []; }
+  try{
+    const mv = await storageGet("custom-movement-tags");
+    customMovement = mv && mv.value ? JSON.parse(mv.value) : [];
+  }catch(err){ customMovement = []; }
+  rebuildAllChips();
+}
+
+async function saveCustomTags(){
+  try{ await storageSet("custom-equipment-tags", JSON.stringify(customEquipment)); }catch(err){}
+  try{ await storageSet("custom-movement-tags", JSON.stringify(customMovement)); }catch(err){}
+}
+
+function addCustomTag(stateKey, rawValue){
+  const value = rawValue.trim();
+  if(!value) return;
+  const clean = value.charAt(0).toUpperCase() + value.slice(1);
+  const baseList = stateKey === "equipment" ? EQUIPMENT_BASE : MOVEMENT_BASE;
+  const customList = stateKey === "equipment" ? customEquipment : customMovement;
+  const existsAlready = [...baseList, ...customList].some(v => v.toLowerCase() === clean.toLowerCase());
+  if(existsAlready) return;
+  customList.push(clean);
+  saveCustomTags();
+  rebuildAllChips();
+  updateFilterCount();
+}
+
+function removeCustomTag(stateKey, value){
+  if(stateKey === "equipment"){
+    customEquipment = customEquipment.filter(v => v !== value);
+  } else {
+    customMovement = customMovement.filter(v => v !== value);
+  }
+  state[stateKey].delete(value);
+  saveCustomTags();
+  rebuildAllChips();
+  updateFilterCount();
+  render();
+}
+
+document.getElementById("equipmentAddBtn").addEventListener("click", ()=>{
+  const input = document.getElementById("equipmentInput");
+  addCustomTag("equipment", input.value);
+  input.value = "";
+  input.focus();
+});
+document.getElementById("equipmentInput").addEventListener("keydown", (e)=>{
+  if(e.key === "Enter"){ e.preventDefault(); document.getElementById("equipmentAddBtn").click(); }
+});
+document.getElementById("movementAddBtn").addEventListener("click", ()=>{
+  const input = document.getElementById("movementInput");
+  addCustomTag("movement", input.value);
+  input.value = "";
+  input.focus();
+});
+document.getElementById("movementInput").addEventListener("keydown", (e)=>{
+  if(e.key === "Enter"){ e.preventDefault(); document.getElementById("movementAddBtn").click(); }
+});
+
+loadCustomTags();
+
+function matches(w){
+  if(state.equipment.size && !w.equipment.some(e=>state.equipment.has(e))) return false;
+  if(state.movement.size && !w.movement.some(m=>state.movement.has(m))) return false;
+  if(state.duration.size && !state.duration.has(w.duration)) return false;
+  if(state.style.size && !state.style.has(w.style)) return false;
+  return true;
+}
+
+/* ================= WOD GENERATOR ================= */
+
+const MOVE_LIBRARY = [
+  // Squat
+  {name:"Barbell Back Squat", equipment:["Barbell"], movement:"Squat", contexts:["strength","conditioning"], load:3, loadHint:"barbell"},
+  {name:"Barbell Front Squat", equipment:["Barbell"], movement:"Squat", contexts:["strength","conditioning"], load:3, loadHint:"barbell"},
+  {name:"Box Squat", equipment:["Barbell","Box"], movement:"Squat", contexts:["strength"], load:3, loadHint:"barbell"},
+  {name:"DB Goblet Squat", equipment:["Dumbbell"], movement:"Squat", contexts:["strength","conditioning"], load:2, loadHint:"dumbbell"},
+  {name:"KB Goblet Squat", equipment:["Kettlebell"], movement:"Squat", contexts:["strength","conditioning"], load:2, loadHint:"kettlebell"},
+  {name:"Plate Front Squat", equipment:["Plates"], movement:"Squat", contexts:["strength","conditioning"], load:2, loadHint:"plates"},
+  {name:"Weighted Vest Squat", equipment:["Weighted Vest"], movement:"Squat", contexts:["strength","conditioning"], load:2, loadHint:"vest"},
+  {name:"Air Squat", equipment:["Bodyweight"], movement:"Squat", contexts:["strength","conditioning"], load:1, loadHint:"bodyweight"},
+  {name:"Jump Squat", equipment:["Bodyweight"], movement:"Squat", contexts:["conditioning"], load:2, loadHint:"bodyweight"},
+  {name:"Band Squat", equipment:["Bands"], movement:"Squat", contexts:["strength","mobility"], load:1, loadHint:"band"},
+  {name:"Box Step-Up", equipment:["Box"], movement:"Squat", contexts:["strength","conditioning"], load:1, loadHint:"bodyweight", perSide:true},
+  {name:"Weighted Box Step-Up", equipment:["Box","Dumbbell"], movement:"Squat", contexts:["strength"], load:2, loadHint:"dumbbell", perSide:true},
+  {name:"Box Jump", equipment:["Box"], movement:"Squat", contexts:["conditioning"], load:3, loadHint:"bodyweight"},
+  // Hinge
+  {name:"Barbell Deadlift", equipment:["Barbell"], movement:"Hinge", contexts:["strength","conditioning"], load:3, loadHint:"barbell"},
+  {name:"Barbell RDL", equipment:["Barbell"], movement:"Hinge", contexts:["strength","conditioning"], load:2, loadHint:"barbell"},
+  {name:"DB RDL", equipment:["Dumbbell"], movement:"Hinge", contexts:["strength"], load:2, loadHint:"dumbbell"},
+  {name:"Kettlebell Swing", equipment:["Kettlebell"], movement:"Hinge", contexts:["strength","conditioning"], load:2, loadHint:"kettlebell"},
+  {name:"KB Deadlift", equipment:["Kettlebell"], movement:"Hinge", contexts:["strength"], load:2, loadHint:"kettlebell"},
+  {name:"Plate RDL", equipment:["Plates"], movement:"Hinge", contexts:["strength"], load:2, loadHint:"plates"},
+  {name:"Slam Ball Hinge Slam", equipment:["Slam Ball"], movement:"Hinge", contexts:["conditioning"], load:2, loadHint:"slamball"},
+  {name:"Band Good Morning", equipment:["Bands"], movement:"Hinge", contexts:["strength","mobility"], load:1, loadHint:"band"},
+  {name:"Bodyweight Good Morning", equipment:["Bodyweight"], movement:"Hinge", contexts:["mobility"], load:1, loadHint:"bodyweight"},
+  {name:"Single-Leg RDL", equipment:["Dumbbell"], movement:"Hinge", contexts:["strength","mobility"], load:2, loadHint:"dumbbell", perSide:true},
+  // Push
+  {name:"Barbell Bench Press", equipment:["Barbell","Bench"], movement:"Push", contexts:["strength"], load:2, loadHint:"barbell"},
+  {name:"DB Bench Press", equipment:["Dumbbell","Bench"], movement:"Push", contexts:["strength"], load:2, loadHint:"dumbbell"},
+  {name:"DB Push Press", equipment:["Dumbbell"], movement:"Push", contexts:["strength","conditioning"], load:2, loadHint:"dumbbell"},
+  {name:"KB Push Press", equipment:["Kettlebell"], movement:"Push", contexts:["strength","conditioning"], load:2, loadHint:"kettlebell"},
+  {name:"Plate Push Press", equipment:["Plates"], movement:"Push", contexts:["strength","conditioning"], load:2, loadHint:"plates"},
+  {name:"Push-Up", equipment:["Bodyweight"], movement:"Push", contexts:["strength","conditioning"], load:1, loadHint:"bodyweight"},
+  {name:"Weighted Vest Push-Up", equipment:["Weighted Vest"], movement:"Push", contexts:["strength","conditioning"], load:2, loadHint:"vest"},
+  {name:"Box Push-Up", equipment:["Box"], movement:"Push", contexts:["strength","conditioning"], load:1, loadHint:"bodyweight"},
+  {name:"Band Chest Press", equipment:["Bands"], movement:"Push", contexts:["strength","mobility"], load:1, loadHint:"band"},
+  {name:"Bench Dip", equipment:["Bench","Bodyweight"], movement:"Push", contexts:["strength","conditioning"], load:2, loadHint:"bodyweight"},
+  // Pull
+  {name:"Barbell Bent-Over Row", equipment:["Barbell"], movement:"Pull", contexts:["strength"], load:2, loadHint:"barbell"},
+  {name:"DB Single-Arm Row", equipment:["Dumbbell","Bench"], movement:"Pull", contexts:["strength"], load:1, loadHint:"dumbbell", perSide:true},
+  {name:"Kettlebell Row", equipment:["Kettlebell"], movement:"Pull", contexts:["strength"], load:1, loadHint:"kettlebell", perSide:true},
+  {name:"Band Row", equipment:["Bands"], movement:"Pull", contexts:["strength","mobility"], load:1, loadHint:"band"},
+  {name:"Band Pull-Apart", equipment:["Bands"], movement:"Pull", contexts:["mobility","strength"], load:1, loadHint:"band"},
+  {name:"Pull-Up", equipment:["Pull-up Bar"], movement:"Pull", contexts:["strength","conditioning"], load:2, loadHint:"bodyweight"},
+  {name:"Chin-Up", equipment:["Pull-up Bar"], movement:"Pull", contexts:["strength"], load:2, loadHint:"bodyweight"},
+  {name:"Band-Assisted Pull-Up", equipment:["Pull-up Bar","Bands"], movement:"Pull", contexts:["strength"], load:1, loadHint:"bodyweight"},
+  {name:"Weighted Vest Pull-Up", equipment:["Pull-up Bar","Weighted Vest"], movement:"Pull", contexts:["strength"], load:3, loadHint:"vest"},
+  {name:"Ring or Bar Row", equipment:["Bodyweight"], movement:"Pull", contexts:["strength","conditioning"], load:1, loadHint:"bodyweight"},
+  // Carry
+  {name:"Kettlebell Farmer's Carry", equipment:["Kettlebell"], movement:"Carry", contexts:["strength","conditioning"], load:2, loadHint:"kettlebell", unit:"distance"},
+  {name:"DB Farmer's Carry", equipment:["Dumbbell"], movement:"Carry", contexts:["strength","conditioning"], load:2, loadHint:"dumbbell", unit:"distance"},
+  {name:"Plate Pinch Carry", equipment:["Plates"], movement:"Carry", contexts:["strength","conditioning"], load:2, loadHint:"plates", unit:"distance"},
+  {name:"Overhead Plate Carry", equipment:["Plates"], movement:"Carry", contexts:["strength"], load:2, loadHint:"plates", perSide:true, unit:"distance"},
+  {name:"Kettlebell Suitcase Carry", equipment:["Kettlebell"], movement:"Carry", contexts:["strength"], load:2, loadHint:"kettlebell", perSide:true, unit:"distance"},
+  {name:"Weighted Vest Carry", equipment:["Weighted Vest"], movement:"Carry", contexts:["strength","conditioning"], load:2, loadHint:"vest", unit:"distance"},
+  // Rotation
+  {name:"Band Woodchop", equipment:["Bands"], movement:"Rotation", contexts:["strength","mobility"], load:1, loadHint:"band", perSide:true},
+  {name:"Kettlebell Halo", equipment:["Kettlebell"], movement:"Rotation", contexts:["strength","mobility"], load:1, loadHint:"kettlebell"},
+  {name:"Slam Ball Rotational Slam", equipment:["Slam Ball"], movement:"Rotation", contexts:["conditioning"], load:2, loadHint:"slamball", perSide:true},
+  {name:"Plate Russian Twist", equipment:["Plates"], movement:"Rotation", contexts:["conditioning"], load:2, loadHint:"plates"},
+  {name:"Russian Twist", equipment:["Bodyweight"], movement:"Rotation", contexts:["conditioning"], load:1, loadHint:"bodyweight"},
+  {name:"Thoracic Rotation", equipment:["Bodyweight"], movement:"Rotation", contexts:["mobility"], load:1, loadHint:"bodyweight", perSide:true},
+  // Locomotion
+  {name:"Row", equipment:["Rower"], movement:"Locomotion", contexts:["conditioning"], load:1, loadHint:"bodyweight", unit:"distance"},
+  {name:"Jump Rope", equipment:["Jump Rope"], movement:"Locomotion", contexts:["conditioning"], load:1, loadHint:"bodyweight", unit:"time"},
+  {name:"Slam Ball Slams", equipment:["Slam Ball"], movement:"Locomotion", contexts:["conditioning"], load:2, loadHint:"slamball"},
+  {name:"Burpees", equipment:["Bodyweight"], movement:"Locomotion", contexts:["conditioning"], load:2, loadHint:"bodyweight"},
+  {name:"Weighted Vest Shuttle Run", equipment:["Weighted Vest"], movement:"Locomotion", contexts:["conditioning"], load:3, loadHint:"vest", unit:"distance"},
+  {name:"Shuttle Run", equipment:["Bodyweight"], movement:"Locomotion", contexts:["conditioning"], load:2, loadHint:"bodyweight", unit:"distance"},
+  // Core
+  {name:"Plank", equipment:["Bodyweight"], movement:"Core", contexts:["strength","mobility"], load:1, loadHint:"bodyweight", unit:"time"},
+  {name:"Hollow Hold", equipment:["Bodyweight"], movement:"Core", contexts:["strength","conditioning"], load:1, loadHint:"bodyweight", unit:"time"},
+  {name:"Toes-to-Bar", equipment:["Pull-up Bar"], movement:"Core", contexts:["strength","conditioning"], load:2, loadHint:"bodyweight"},
+  {name:"Hanging Knee Raise", equipment:["Pull-up Bar"], movement:"Core", contexts:["strength","conditioning"], load:1, loadHint:"bodyweight"},
+  {name:"Sit-Up", equipment:["Bodyweight"], movement:"Core", contexts:["conditioning"], load:1, loadHint:"bodyweight"},
+  {name:"Plate Sit-Up", equipment:["Plates"], movement:"Core", contexts:["strength"], load:2, loadHint:"plates"},
+  {name:"Band Pallof Press", equipment:["Bands"], movement:"Core", contexts:["strength","mobility"], load:1, loadHint:"band", perSide:true}
+];
+
+const STYLE_CONTEXT = {
+  "Strength": ["strength"],
+  "Metcon": ["conditioning"],
+  "EMOM": ["conditioning","strength"],
+  "AMRAP": ["conditioning","strength"],
+  "Hybrid": ["strength","conditioning"],
+  "Recovery/Mobility": ["mobility"]
+};
+
+const DURATION_PARAMS = {
+  "Under 20": {rounds:[3,4], emomTotal:[10,12], amrap:[12,15]},
+  "20–35": {rounds:[4,5], emomTotal:[20,24], amrap:[18,20]},
+  "35–50": {rounds:[5,6], emomTotal:[28,32], amrap:[24,28]},
+  "50+": {rounds:[6,8], emomTotal:[36,40], amrap:[30,35]}
+};
+
+const TITLE_ADJ = ["Iron","Steel","Granite","Ember","Switchback","Bedrock","Ridge","Anchor","Current","Tempo","Forge","Timber","Copper","Slate","Marrow"];
+const TITLE_NOUN = ["Circuit","Grind","Ladder","Line","Drift","Run","Push","Set","Round","Engine","Standard","Signal","Charge","Reckoning"];
+
+const COACH_NOTES = {
+  1:[
+    "Nothing here should feel like a grind — if it does, the load or pace crept up. Dial it back.",
+    "Full range of motion over speed today. This one rewards patience, not hustle.",
+    "Use this as a technique day — light enough to groove the pattern, not just survive it."
+  ],
+  2:[
+    "Land around a 7 out of 10 effort on the loaded movements — hard, but with something left.",
+    "Brace before every rep that involves picking something up off the floor. That's non-negotiable.",
+    "If the last two reps of a set start breaking down, that's your stopping point, not a challenge to push through."
+  ],
+  3:[
+    "High joint load by design — treat this like the hardest thing you do this week, not a warm-up for tomorrow.",
+    "Prioritize full rest between the heavy sets. Rushing this one is how a good session turns into three days off.",
+    "This is a day to stop shy of technical failure every time, even if it means leaving a rep or two on the table."
+  ]
+};
+const RECOVER_NOTES = {
+  1:[
+    "Low systemic cost — a normal meal and normal hydration cover it.",
+    "Nothing extra needed here beyond your usual routine and some water.",
+    "This is closer to active recovery than a hard session — treat it that way."
+  ],
+  2:[
+    "30g protein within the hour, plus extra water — a normal but real training day.",
+    "Nothing dramatic needed, just don't skip the post-session protein and a short walk.",
+    "Moderate cost — refuel normally, and keep tomorrow's session easier than today's."
+  ],
+  3:[
+    "Prioritize this one: protein within the hour, extra hydration, and a genuinely easier day tomorrow.",
+    "This is the session to actually plan recovery around — good sleep tonight matters more than usual.",
+    "Treat the next 24 hours as part of the workout — fuel, hydrate, and don't stack another hard session on top."
+  ]
+};
+
+function pickFrom(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+function shuffleCopy(arr){
+  const a = [...arr];
+  for(let i=a.length-1; i>0; i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+function joinWithAnd(arr){
+  if(arr.length === 1) return arr[0];
+  if(arr.length === 2) return arr.join(" and ");
+  return arr.slice(0,-1).join(", ") + ", and " + arr[arr.length-1];
+}
+
+function loadDescriptor(entry){
+  switch(entry.loadHint){
+    case "bodyweight": return "bodyweight";
+    case "band": return "light-moderate band";
+    case "vest": return "vest on";
+    case "slamball": return "moderate slam ball";
+    case "plates": return "moderate plate";
+    default: return "moderate load";
+  }
+}
+
+function prescribeDetail(entry, style){
+  const perSide = entry.perSide ? " per side" : "";
+  if(entry.unit === "time"){
+    const t = pickFrom([20,30,45]);
+    const loadPart = (entry.loadHint === "bodyweight" || entry.loadHint === "band") ? "" : ", moderate effort";
+    return `${t} seconds${perSide}${loadPart}`;
+  }
+  if(entry.unit === "distance"){
+    if(entry.equipment.includes("Rower")) return `${pickFrom([300,400,500])}m @ steady, sustainable pace`;
+    if(entry.movement === "Locomotion" && entry.loadHint === "bodyweight") return `${pickFrom([20,30,40])}m down-and-back, brisk pace`;
+    if(entry.movement === "Locomotion") return `${pickFrom([20,30,40])}m down-and-back, ${loadDescriptor(entry)}`;
+    return `${pickFrom([20,30,40])}m${perSide}, ${loadDescriptor(entry)}`;
+  }
+  const bodyweightStyleLoads = ["bodyweight","band","vest","slamball"];
+  if(style === "Strength"){
+    const sets = pickFrom([3,4,5]);
+    const reps = pickFrom([5,6,8]);
+    if(bodyweightStyleLoads.includes(entry.loadHint)){
+      return `${sets} sets × ${reps} reps${perSide}, RPE ${pickFrom([6,7])}`;
+    }
+    return `${sets} sets × ${reps} reps${perSide} @ ${pickFrom([60,65,70,75])}% 1RM`;
+  }
+  if(style === "EMOM"){
+    return `${pickFrom([5,6,8,10])} reps${perSide}, ${loadDescriptor(entry)}`;
+  }
+  if(style === "Recovery/Mobility"){
+    return `${pickFrom([8,10])} slow reps${perSide}, controlled tempo`;
+  }
+  return `${pickFrom([8,10,12,15])} reps${perSide}, ${loadDescriptor(entry)}`;
+}
+
+function buildScheme(style, duration){
+  const D = DURATION_PARAMS[duration];
+  switch(style){
+    case "Strength": return "Straight sets, full rest between movements";
+    case "Metcon": return `${pickFrom(D.rounds)} rounds, rest as needed between rounds`;
+    case "EMOM": return `EMOM × ${pickFrom(D.emomTotal)} — cycle through each movement, rest what's left in the minute`;
+    case "AMRAP": return `AMRAP ${pickFrom(D.amrap)} minutes`;
+    case "Hybrid": return `${pickFrom(D.rounds)} rounds mixing strength and conditioning, rest as needed`;
+    case "Recovery/Mobility": return `${pickFrom([2,3])} unhurried rounds, no clock pressure`;
+    default: return "Straight through";
+  }
+}
+
+/* ---- generate a WOD live, straight from active filters ---- */
+function generateWodFromFilters(){
+  const eqFilter = [...state.equipment].filter(e => EQUIPMENT_BASE.includes(e));
+  const mvFilter = [...state.movement].filter(m => MOVEMENT_BASE.includes(m));
+  const durFilter = [...state.duration];
+  const styFilter = [...state.style];
+  const usedCustom = [...state.equipment].some(e => customEquipment.includes(e)) || [...state.movement].some(m => customMovement.includes(m));
+
+  const style = styFilter.length ? pickFrom(styFilter) : pickFrom(STYLE);
+  const duration = durFilter.length ? pickFrom(durFilter) : pickFrom(DURATION);
+  const contexts = STYLE_CONTEXT[style];
+
+  const basePool = MOVE_LIBRARY.filter(m => m.contexts.some(c => contexts.includes(c)));
+  let pool = basePool;
+  let relaxed = null;
+
+  if(eqFilter.length) pool = pool.filter(m => m.equipment.some(e => eqFilter.includes(e)));
+  if(mvFilter.length) pool = pool.filter(m => mvFilter.includes(m.movement));
+
+  if(pool.length === 0 && mvFilter.length){
+    pool = eqFilter.length ? basePool.filter(m => m.equipment.some(e => eqFilter.includes(e))) : basePool;
+    relaxed = "Broadened the movement filter — nothing matched that exact combination.";
+  }
+  if(pool.length === 0 && eqFilter.length){
+    pool = basePool;
+    relaxed = relaxed
+      ? "Broadened both equipment and movement filters to build a full session."
+      : "Broadened the equipment filter — nothing matched that exact combination.";
+  }
+  if(pool.length === 0) pool = MOVE_LIBRARY;
+
+  const count = Math.min(pickFrom([2,3]), pool.length) || 1;
+  const chosen = shuffleCopy(pool).slice(0, Math.max(count, Math.min(2, pool.length)));
+
+  const work = chosen.map(entry => ({ move: entry.name, detail: prescribeDetail(entry, style) }));
+  const avgLoad = chosen.reduce((s,e)=>s+e.load,0) / chosen.length;
+  let load = avgLoad < 1.67 ? 1 : (avgLoad < 2.34 ? 2 : 3);
+  if(style === "Recovery/Mobility") load = 1;
+
+  const equipmentUsed = [...new Set(chosen.flatMap(e=>e.equipment))];
+  const movementUsed = [...new Set(chosen.map(e=>e.movement))];
+  const moveNames = chosen.map(c=>c.name);
+
+  const noteParts = [];
+  if(relaxed) noteParts.push(relaxed);
+  if(usedCustom) noteParts.push("Custom equipment/movement tags aren't in the generator's move library yet, so those were skipped.");
+
+  return {
+    title: `${pickFrom(TITLE_ADJ)} ${pickFrom(TITLE_NOUN)}`,
+    style,
+    duration,
+    equipment: equipmentUsed,
+    movement: movementUsed,
+    load,
+    desc: `A ${style.toLowerCase()} session built from ${joinWithAnd(moveNames)}.`,
+    scheme: buildScheme(style, duration),
+    work,
+    coach: pickFrom(COACH_NOTES[load]),
+    recover: pickFrom(RECOVER_NOTES[load]),
+    genNote: noteParts.join(" ") || null
+  };
+}
+
+/* ================= GO HARDER / GO EASIER ================= */
+
+function bumpSchemeRounds(scheme, delta, min, max){
+  const m = scheme.match(/^(\d+)( rounds)/i);
+  if(!m) return null;
+  const n = parseInt(m[1], 10);
+  const newN = Math.min(max, Math.max(min, n + delta));
+  if(newN === n) return null;
+  return { newScheme: scheme.replace(/^(\d+)( rounds)/i, newN + m[2]), newN };
+}
+function bumpSchemeAmrap(scheme, delta, min, max){
+  const m = scheme.match(/AMRAP (\d+) minutes/i);
+  if(!m) return null;
+  const n = parseInt(m[1], 10);
+  const newN = Math.min(max, Math.max(min, n + delta));
+  if(newN === n) return null;
+  return { newScheme: scheme.replace(/AMRAP \d+ minutes/i, `AMRAP ${newN} minutes`), newN };
+}
+function bumpSchemeEmom(scheme, delta, min, max){
+  const m = scheme.match(/EMOM × (\d+)/i);
+  if(!m) return null;
+  const n = parseInt(m[1], 10);
+  const newN = Math.min(max, Math.max(min, n + delta));
+  if(newN === n) return null;
+  return { newScheme: scheme.replace(/EMOM × \d+/i, `EMOM × ${newN}`), newN };
+}
+function adjustSchemeRest(scheme, delta, min, max){
+  let m = scheme.match(/rest (\d+)[- ]?sec/i);
+  if(m){
+    const n = parseInt(m[1], 10);
+    const newN = Math.min(max, Math.max(min, n + delta));
+    if(newN === n) return null;
+    return { newScheme: scheme.replace(/rest \d+[- ]?sec/i, `rest ${newN} sec`), newN };
+  }
+  m = scheme.match(/(\d+)-sec rest/i);
+  if(m){
+    const n = parseInt(m[1], 10);
+    const newN = Math.min(max, Math.max(min, n + delta));
+    if(newN === n) return null;
+    return { newScheme: scheme.replace(/\d+-sec rest/i, `${newN}-sec rest`), newN };
+  }
+  if(delta < 0 && /rest as needed/i.test(scheme)){
+    return { newScheme: scheme.replace(/rest as needed/i, "rest 45 sec"), newN: 45 };
+  }
+  return null;
+}
+function scaleRepsInWork(work, factor, minVal){
+  let changed = false;
+  const newWork = work.map(step => {
+    const newDetail = step.detail.replace(/(\d+)(\s*reps)/gi, (full, numStr, suffix) => {
+      const n = parseInt(numStr, 10);
+      let newN = Math.round(n * factor);
+      newN = factor > 1 ? Math.max(newN, n + 1) : Math.min(newN, n - 1);
+      newN = Math.max(minVal, newN);
+      if(newN === n) return full;
+      changed = true;
+      return newN + suffix;
+    });
+    return { ...step, detail: newDetail };
+  });
+  return changed ? newWork : null;
+}
+function scalePercentInWork(work, delta, min, max){
+  let changed = false;
+  const newWork = work.map(step => {
+    const newDetail = step.detail.replace(/(\d+)(%\s*1RM)/gi, (full, numStr, suffix) => {
+      const n = parseInt(numStr, 10);
+      const newN = Math.min(max, Math.max(min, n + delta));
+      if(newN === n) return full;
+      changed = true;
+      return newN + suffix;
+    });
+    return { ...step, detail: newDetail };
+  });
+  return changed ? newWork : null;
+}
+function addFinisherMove(w){
+  const pool = MOVE_LIBRARY.filter(m => m.contexts.includes("conditioning") &&
+    m.equipment.some(e => w.equipment.includes(e) || e === "Bodyweight"));
+  const usable = pool.length ? pool : MOVE_LIBRARY.filter(m => m.equipment.includes("Bodyweight"));
+  if(!usable.length) return null;
+  const entry = pickFrom(usable);
+  const detail = entry.unit === "time" ? `${pickFrom([30,40,50])} seconds, all-out`
+    : entry.unit === "distance" ? `${pickFrom([200,300,400])}m for time`
+    : `${pickFrom([30,40,50])} reps, unbroken if possible`;
+  return { move: entry.name, detail };
+}
+
+function scaleWorkout(original, direction){
+  const scaled = JSON.parse(JSON.stringify(original));
+  const harder = direction === "harder";
+
+  const strategies = harder ? [
+    () => {
+      const r = bumpSchemeRounds(scaled.scheme, 1, 2, 8);
+      if(!r) return null;
+      scaled.scheme = r.newScheme;
+      return `Added a round — now ${r.newN} rounds.`;
+    },
+    () => {
+      const r = bumpSchemeAmrap(scaled.scheme, 4, 8, 40);
+      if(!r) return null;
+      scaled.scheme = r.newScheme;
+      return `Stretched the AMRAP to ${r.newN} minutes.`;
+    },
+    () => {
+      const r = bumpSchemeEmom(scaled.scheme, 4, 8, 44);
+      if(!r) return null;
+      scaled.scheme = r.newScheme;
+      return `Extended the EMOM to ${r.newN} minutes.`;
+    },
+    () => {
+      const newWork = scaleRepsInWork(scaled.work, 1.25, 3);
+      if(!newWork) return null;
+      scaled.work = newWork;
+      return "Bumped the rep counts across the board.";
+    },
+    () => {
+      const newWork = scalePercentInWork(scaled.work, 5, 40, 85);
+      if(!newWork) return null;
+      scaled.work = newWork;
+      return "Nudged the working weight up 5%.";
+    },
+    () => {
+      const r = adjustSchemeRest(scaled.scheme, -15, 20, 180);
+      if(!r) return null;
+      scaled.scheme = r.newScheme;
+      return "Tightened the rest windows.";
+    },
+    () => {
+      const move = addFinisherMove(scaled);
+      if(!move) return null;
+      scaled.work = [...scaled.work, move];
+      scaled.load = Math.min(3, scaled.load + 1);
+      return `Tacked on a finishing burst: ${move.move}.`;
+    }
+  ] : [
+    () => {
+      const r = bumpSchemeRounds(scaled.scheme, -1, 2, 8);
+      if(!r) return null;
+      scaled.scheme = r.newScheme;
+      return `Dropped a round — down to ${r.newN} rounds.`;
+    },
+    () => {
+      const r = bumpSchemeAmrap(scaled.scheme, -4, 8, 40);
+      if(!r) return null;
+      scaled.scheme = r.newScheme;
+      return `Trimmed the AMRAP to ${r.newN} minutes.`;
+    },
+    () => {
+      const r = bumpSchemeEmom(scaled.scheme, -4, 8, 44);
+      if(!r) return null;
+      scaled.scheme = r.newScheme;
+      return `Shortened the EMOM to ${r.newN} minutes.`;
+    },
+    () => {
+      const newWork = scaleRepsInWork(scaled.work, 0.8, 3);
+      if(!newWork) return null;
+      scaled.work = newWork;
+      return "Trimmed the rep counts across the board.";
+    },
+    () => {
+      const newWork = scalePercentInWork(scaled.work, -5, 40, 85);
+      if(!newWork) return null;
+      scaled.work = newWork;
+      return "Backed the working weight off 5%.";
+    },
+    () => {
+      const r = adjustSchemeRest(scaled.scheme, 15, 20, 180);
+      if(!r) return null;
+      scaled.scheme = r.newScheme;
+      return "Loosened up the rest windows.";
+    },
+    () => {
+      if(scaled.work.length <= 1) return null;
+      const idx = Math.floor(Math.random() * scaled.work.length);
+      const removed = scaled.work[idx];
+      scaled.work = scaled.work.filter((_, i) => i !== idx);
+      scaled.load = Math.max(1, scaled.load - 1);
+      return `Dropped ${removed.move} from the lineup — one less thing to juggle.`;
+    }
+  ];
+
+  for(const strat of shuffleCopy(strategies)){
+    const label = strat();
+    if(label){
+      scaled.scaleNote = { direction, label };
+      return scaled;
+    }
+  }
+
+  scaled.scaleNote = {
+    direction,
+    label: harder
+      ? "This one's already dialed up — try adding external load or shaving your rest instead."
+      : "This one's already about as light as it gets structurally — trust how you feel and stop a rep or two early."
+  };
+  return scaled;
+}
+
+/* =============== END GO HARDER / GO EASIER =============== */
+
+function slugify(str){
+  return str.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+const cardStateMap = new Map(); // cardId -> { workout, opts }
+
+function renderGenerated(){
+  const area = document.getElementById("generatedArea");
+  const w = generateWodFromFilters();
+  const id = "gen-card";
+  cardStateMap.set(id, {
+    original: JSON.parse(JSON.stringify(w)),
+    workout: w,
+    history: [],
+    lastDirection: null,
+    opts: {generated:true}
+  });
+  area.innerHTML = cardHTML(w, {generated:true}, id);
+}
+
+/* =============== END WOD GENERATOR =============== */
+
+function cardHTML(w, opts={}, cardId){
+  const id = cardId || ("card-" + slugify(w.title) + "-" + Math.random().toString(36).slice(2,6));
+  const stamps = w.equipment.map(e=>`<div class="stamp" title="${e}">${stampAbbr[e] || e.slice(0,2).toUpperCase()}</div>`).join("");
+  const mvTags = w.movement.map(m=>`<span class="mv-tag">${m}</span>`).join("");
+  const segs = [1,2,3].map(i=>`<div class="load-seg ${i<=w.load?loadSegClass[w.load]:''}"></div>`).join("");
+  const workRows = w.work.map((step,i)=>`
+    <li class="work-row">
+      <span class="work-num">${i+1}</span>
+      <span class="work-text"><b>${step.move}</b><br>${step.detail}</span>
+    </li>`).join("");
+  const ribbon = opts.generated ? `<div class="gen-ribbon">🪚 Freshly cut from your filters</div>` : "";
+  const sourceHint = "";
+  const genNote = w.genNote ? `<div class="gen-note">${w.genNote}</div>` : "";
+  const scaleNote = w.scaleNote
+    ? `<div class="scale-note ${w.scaleNote.direction}">${w.scaleNote.direction === "harder" ? "🔺" : "🔻"} ${w.scaleNote.label} <button class="reset-btn" type="button">⟲ Reset to original</button></div>`
+    : "";
+  const regenBtn = opts.generated ? `<button class="regen-btn" type="button">↻ Generate another</button>` : "";
+  return `
+    <div class="card ${opts.generated ? 'card-generated' : ''}" data-card-id="${id}">
+      ${ribbon}
+      <div class="card-top">
+        <span class="badge ${styleClass[w.style]}">${w.style}</span>
+        <span class="duration-chip">${w.duration} min</span>
+      </div>
+      <h3>${w.title}</h3>
+      ${sourceHint}
+      ${genNote}
+      <div class="load">
+        <span class="load-label">Joint Load</span>
+        <div class="load-bar">${segs}</div>
+        <span class="load-word ${loadClass[w.load]}">${loadWord[w.load]}</span>
+      </div>
+      <div class="stamps">${stamps}</div>
+      <div class="movement-tags">${mvTags}</div>
+      <p class="desc">${w.desc}</p>
+      <div class="work-block">
+        <div class="work-head">
+          <span class="work-title">The Work</span>
+          <span class="work-scheme">${w.scheme}</span>
+        </div>
+        <ol class="work-list">${workRows}</ol>
+      </div>
+      <div class="scale-row">
+        <button class="scale-btn easier-btn" type="button" data-scale="easier">↓ Go Easier</button>
+        <button class="scale-btn harder-btn" type="button" data-scale="harder">↑ Go Harder</button>
+      </div>
+      ${scaleNote}
+      <div class="note note-coach"><b>Coaching note —</b> ${w.coach}</div>
+      <div class="note note-recover"><b>Recovery —</b> ${w.recover}</div>
+      <div class="btn-row">
+        ${regenBtn}
+        <button class="log-btn" type="button" data-title="${w.title}" data-style="${w.style}" data-duration="${w.duration}" data-load="${w.load}">
+          <span class="tick">＋</span> Log this session
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function render(){
+  const results = WORKOUTS.filter(matches);
+  const grid = document.getElementById("grid");
+  document.getElementById("resultCount").textContent = results.length;
+
+  if(results.length === 0){
+    grid.innerHTML = `
+      <div class="empty">
+        <h4>No sessions match these filters</h4>
+        <p>Try loosening one category — equipment and movement filters combine fast. Or generate a fresh WOD above instead.</p>
+        <button class="clear-btn" onclick="document.getElementById('clearBtn').click()">Clear filters</button>
+      </div>`;
+    return;
+  }
+  grid.innerHTML = results.map(w => {
+    const id = "sig-" + slugify(w.title);
+    if(!cardStateMap.has(id)){
+      const clone = JSON.parse(JSON.stringify(w));
+      cardStateMap.set(id, {
+        original: JSON.parse(JSON.stringify(w)),
+        workout: clone,
+        history: [],
+        lastDirection: null,
+        opts: {}
+      });
+    }
+    const entry = cardStateMap.get(id);
+    return cardHTML(entry.workout, entry.opts, id);
+  }).join("");
+}
+
+document.getElementById("statTotal").textContent = WORKOUTS.length;
+render();
+
+/* ---------------- TRAINING LOG ---------------- */
+
+const LOG_KEY = "training-log-entries";
+let logEntries = [];
+
+function fmtDate(iso){
+  const d = new Date(iso);
+  return d.toLocaleDateString(undefined, {month:"short", day:"numeric"});
+}
+
+async function loadLog(){
+  const status = document.getElementById("logStatus");
+  status.textContent = "Loading log…";
+  try{
+    const result = await storageGet(LOG_KEY);
+    logEntries = result && result.value ? JSON.parse(result.value) : [];
+  }catch(err){
+    logEntries = [];
+  }
+  status.textContent = "";
+  renderLog();
+}
+
+async function saveLog(){
+  const status = document.getElementById("logStatus");
+  try{
+    const result = await storageSet(LOG_KEY, JSON.stringify(logEntries));
+    if(!result){
+      status.textContent = "Couldn't save — try again.";
+      return;
+    }
+    status.textContent = "";
+  }catch(err){
+    status.textContent = "Couldn't save — try again.";
+  }
+}
+
+function addLogEntry(w){
+  logEntries.unshift({
+    id: Date.now() + "-" + Math.random().toString(36).slice(2,7),
+    title: w.title,
+    style: w.style,
+    duration: w.duration,
+    load: Number(w.load),
+    date: new Date().toISOString()
+  });
+  saveLog();
+  renderLog();
+}
+
+function removeLogEntry(id){
+  logEntries = logEntries.filter(e => e.id !== id);
+  saveLog();
+  renderLog();
+}
+
+function renderLog(){
+  const list = document.getElementById("logList");
+  const summaryEl = document.getElementById("weekSummary");
+
+  if(logEntries.length === 0){
+    list.innerHTML = "";
+    summaryEl.innerHTML = "";
+    list.innerHTML = `<div class="log-empty"><span>Nothing logged yet.</span>Finish a session above and tap "Log this session" to start building your history.</div>`;
+    return;
+  }
+
+  // weekly summary — last 7 days
+  const weekAgo = Date.now() - 7*24*60*60*1000;
+  const recent = logEntries.filter(e => new Date(e.date).getTime() >= weekAgo);
+  const highCount = recent.filter(e => e.load === 3).length;
+
+  let warnHTML = "";
+  if(highCount >= 2){
+    warnHTML = `<div class="week-warn">${highCount} high joint-load sessions in the last 7 days — worth stacking a Recovery/Mobility or low-load day next.</div>`;
+  } else if(recent.length === 0){
+    warnHTML = `<div class="week-warn">No sessions logged in the last 7 days.</div>`;
+  }
+
+  summaryEl.innerHTML = `
+    <div class="week-summary">
+      <div class="week-stat"><span class="w-num">${recent.length}</span><span class="w-lab">Last 7 days</span></div>
+      <div class="week-stat"><span class="w-num">${highCount}</span><span class="w-lab">High load</span></div>
+      <div class="week-stat"><span class="w-num">${logEntries.length}</span><span class="w-lab">All time</span></div>
+      ${warnHTML}
+    </div>
+  `;
+
+  list.innerHTML = logEntries.map(e => `
+    <div class="log-entry">
+      <span class="le-date">${fmtDate(e.date)}</span>
+      <span class="le-title">${e.title}</span>
+      <div class="le-meta">
+        <span class="badge ${styleClass[e.style] || ''}">${e.style}</span>
+        <span class="load-word ${loadClass[e.load]}">${loadWord[e.load]}</span>
+      </div>
+      <button class="le-del" aria-label="Remove this log entry" data-id="${e.id}">×</button>
+    </div>
+  `).join("");
+}
+
+// event delegation: log buttons live inside containers that get re-rendered often
+// (filter changes for the grid, regeneration for the generated area) — one handler, two containers
+function handleLogClick(e){
+  const btn = e.target.closest(".log-btn");
+  if(!btn || btn.classList.contains("logged")) return;
+  addLogEntry({
+    title: btn.dataset.title,
+    style: btn.dataset.style,
+    duration: btn.dataset.duration,
+    load: btn.dataset.load
+  });
+  btn.classList.add("logged");
+  btn.innerHTML = `<span class="tick">✓</span> Logged`;
+  setTimeout(()=>{
+    btn.classList.remove("logged");
+    btn.innerHTML = `<span class="tick">＋</span> Log this session`;
+  }, 1600);
+}
+document.getElementById("grid").addEventListener("click", handleLogClick);
+document.getElementById("generatedArea").addEventListener("click", handleLogClick);
+
+function rerenderCard(id){
+  const entry = cardStateMap.get(id);
+  if(!entry) return;
+  const target = document.querySelector(`[data-card-id="${CSS.escape(id)}"]`);
+  if(target) target.outerHTML = cardHTML(entry.workout, entry.opts, id).trim();
+}
+
+function handleScaleClick(e){
+  const btn = e.target.closest(".scale-btn");
+  if(!btn) return;
+  const cardEl = btn.closest(".card");
+  const id = cardEl && cardEl.dataset.cardId;
+  if(!id || !cardStateMap.has(id)) return;
+  const direction = btn.dataset.scale;
+  const entry = cardStateMap.get(id);
+
+  if(entry.lastDirection && direction !== entry.lastDirection && entry.history.length){
+    // opposite of the last click — undo one step instead of applying a new random mutation
+    const prevStep = entry.history.pop();
+    entry.workout = prevStep.state;
+    entry.lastDirection = entry.history.length ? entry.history[entry.history.length - 1].direction : null;
+  } else {
+    // same direction as last click (or a fresh start) — apply a new mutation
+    entry.history.push({ state: JSON.parse(JSON.stringify(entry.workout)), direction });
+    entry.workout = scaleWorkout(entry.workout, direction);
+    entry.lastDirection = direction;
+  }
+
+  rerenderCard(id);
+}
+document.getElementById("grid").addEventListener("click", handleScaleClick);
+document.getElementById("generatedArea").addEventListener("click", handleScaleClick);
+
+function handleResetClick(e){
+  const btn = e.target.closest(".reset-btn");
+  if(!btn) return;
+  const cardEl = btn.closest(".card");
+  const id = cardEl && cardEl.dataset.cardId;
+  if(!id || !cardStateMap.has(id)) return;
+  const entry = cardStateMap.get(id);
+  entry.workout = JSON.parse(JSON.stringify(entry.original));
+  entry.history = [];
+  entry.lastDirection = null;
+  rerenderCard(id);
+}
+document.getElementById("grid").addEventListener("click", handleResetClick);
+document.getElementById("generatedArea").addEventListener("click", handleResetClick);
+
+document.getElementById("generatedArea").addEventListener("click", (e)=>{
+  if(e.target.closest(".regen-btn")) renderGenerated();
+});
+document.getElementById("generateBtn").addEventListener("click", renderGenerated);
+
+document.getElementById("logList").addEventListener("click", (e)=>{
+  const btn = e.target.closest(".le-del");
+  if(!btn) return;
+  removeLogEntry(btn.dataset.id);
+});
+
+loadLog();
+
+// Register the service worker for offline support.
+// Requires HTTPS (or localhost) — silently no-ops on file:// or unsupported browsers.
+if("serviceWorker" in navigator){
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch((err) => {
+      console.log("Service worker registration skipped:", err.message);
+    });
+  });
+}
+</script>
+</body>
+</html>
