@@ -1,5 +1,5 @@
 const CACHE_NAME = "rough-cut-v1";
-const CORE_ASSETS = ["./rough-cut.html", "./manifest.json"];
+const CORE_ASSETS = ["./index.html", "./manifest.json"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -34,7 +34,7 @@ self.addEventListener("fetch", (event) => {
         return res;
       })
       .catch(() =>
-        caches.match(req).then((cached) => cached || caches.match("./rough-cut.html"))
+        caches.match(req).then((cached) => cached || caches.match("./index.html"))
       )
   );
 });

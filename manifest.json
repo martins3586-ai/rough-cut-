@@ -2,7 +2,7 @@
   "name": "Rough Cut",
   "short_name": "Rough Cut",
   "description": "Strength and conditioning for people who are still being shaped.",
-  "start_url": "./rough-cut.html",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
