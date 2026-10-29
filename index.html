@@ -103,26 +103,57 @@
     line-height:1.55;
     margin:0;
   }
-  .stat-row{
+  .coach-prompt{
     display:flex;
-    gap:28px;
+    align-items:stretch;
+    gap:10px;
     margin-top:26px;
-    flex-wrap:wrap;
+    max-width:640px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:8px;
+    transition:border-color .15s ease, box-shadow .15s ease;
   }
-  .stat{
-    font-family:'JetBrains Mono', monospace;
+  .coach-prompt:focus-within{
+    border-color:var(--teal);
+    box-shadow:0 0 0 3px rgba(82,105,108,0.15);
   }
-  .stat .num{
-    font-size:26.5px;
-    font-weight:700;
+  .coach-prompt textarea{
+    flex:1;
+    min-width:0;
+    resize:none;
+    border:none;
+    outline:none;
+    background:transparent;
     color:var(--text);
-    display:block;
+    font-family:'Inter', sans-serif;
+    font-size:17px;
+    line-height:1.45;
+    padding:8px 10px;
   }
-  .stat .lab{
-    font-size:12px;
-    letter-spacing:.12em;
+  .coach-prompt textarea::placeholder{color:var(--text-faint); opacity:1;}
+  .coach-go{
+    font-family:'JetBrains Mono', monospace;
+    font-size:15px;
+    font-weight:700;
+    letter-spacing:.06em;
     text-transform:uppercase;
-    color:var(--text-faint);
+    color:var(--on-accent);
+    background:var(--rust);
+    border:none;
+    border-radius:9px;
+    padding:0 20px;
+    cursor:pointer;
+    flex-shrink:0;
+  }
+  .coach-go:hover{background:var(--rust-soft);}
+  .coach-note{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--text-dim);
+    margin:10px 0 0;
+    min-height:1em;
   }
 
   /* ---------- FILTER BAR ---------- */
@@ -1012,7 +1043,6 @@
 
   @media (max-width:600px){
     .filters{border-radius:10px;}
-    .stat-row{gap:20px;}
   }
 </style>
 </head>
@@ -1023,12 +1053,11 @@
     <p class="eyebrow">Strength &amp; Conditioning — Est. for Athletes 40+</p>
     <h1>ROUGH<span> CUT</span></h1>
     <p class="tagline">Strength and conditioning for people who are still being shaped — rough around the edges, solid at the core. Scaled with judgment, not just intensity.</p>
-    <div class="stat-row">
-      <div class="stat"><span class="num">68</span><span class="lab">Movements in the shop</span></div>
-      <div class="stat"><span class="num" id="statTotal">16</span><span class="lab">Signature sessions</span></div>
-      <div class="stat"><span class="num">6</span><span class="lab">Styles</span></div>
-      <div class="stat"><span class="num">13</span><span class="lab">Equipment types</span></div>
-    </div>
+    <form class="coach-prompt" id="coachPrompt" autocomplete="off">
+      <textarea id="coachInput" rows="2" maxlength="300" placeholder="Need a trainer today? Let’s go!" aria-label="Tell your trainer what you need today"></textarea>
+      <button type="submit" class="coach-go" id="coachGo">Go</button>
+    </form>
+    <p class="coach-note" id="coachNote" aria-live="polite"></p>
   </header>
 
   <div class="filters" id="filtersPanel">
@@ -2187,7 +2216,6 @@ function render(){
   }).join("");
 }
 
-document.getElementById("statTotal").textContent = WORKOUTS.length;
 render();
 
 /* ---------------- TRAINING LOG ---------------- */
@@ -2364,6 +2392,70 @@ document.getElementById("generatedArea").addEventListener("click", (e)=>{
   if(e.target.closest(".regen-btn")) renderGenerated();
 });
 document.getElementById("generateBtn").addEventListener("click", renderGenerated);
+
+/* ---- trainer prompt: read the request, set filters, cut a WOD ---- */
+const PROMPT_KEYWORDS = {
+  equipment:{
+    "Bodyweight":["bodyweight","no equipment","body weight"],
+    "Barbell":["barbell"],"Dumbbell":["dumbbell","db"],"Kettlebell":["kettlebell","kb"],
+    "Bench":["bench"],"Pull-up Bar":["pull-up","pullup","pull up bar"],"Rower":["row","rower","erg"],
+    "Jump Rope":["jump rope","rope","double under"],"Slam Ball":["slam ball","slam"],
+    "Bands":["band"],"Plates":["plate"],"Weighted Vest":["vest"],"Box":["box"]
+  },
+  movement:{
+    "Squat":["squat","legs","leg day"],"Hinge":["hinge","deadlift","posterior"],
+    "Push":["push","press","chest"],"Pull":["pull","back"],"Carry":["carry"],
+    "Rotation":["rotation","rotational"],"Locomotion":["run","sprint","locomotion"],"Core":["core","abs"]
+  },
+  style:{
+    "Strength":["strength","heavy","strong"],"Metcon":["metcon","conditioning","cardio","sweat"],
+    "EMOM":["emom"],"AMRAP":["amrap"],"Hybrid":["hybrid"],
+    "Recovery/Mobility":["recovery","mobility","sore","stiff","easy","light","deload"]
+  }
+};
+function parsePromptDuration(t){
+  const m = t.match(/(\d{1,3})\s*(min|minute|mins|m\b)/);
+  if(m){
+    const n = +m[1];
+    return n < 20 ? "Under 20" : n <= 35 ? "20–35" : n <= 50 ? "35–50" : "50+";
+  }
+  if(/\b(quick|short|fast)\b/.test(t)) return "Under 20";
+  if(/\b(long|hour)\b/.test(t)) return "50+";
+  return null;
+}
+document.getElementById("coachPrompt").addEventListener("submit", (e)=>{
+  e.preventDefault();
+  const raw = document.getElementById("coachInput").value.trim();
+  const note = document.getElementById("coachNote");
+  const t = raw.toLowerCase();
+  Object.keys(state).forEach(k=>state[k].clear());
+  const picked = [];
+  if(t){
+    for(const key of Object.keys(PROMPT_KEYWORDS)){
+      for(const [opt, words] of Object.entries(PROMPT_KEYWORDS[key])){
+        if(words.some(w => new RegExp("\\b" + w.replace(/[-]/g,"\\-")).test(t))){
+          state[key].add(opt); picked.push(opt);
+        }
+      }
+    }
+    const dur = parsePromptDuration(t);
+    if(dur){ state.duration.add(dur); picked.push(dur + " min"); }
+  }
+  rebuildAllChips();
+  updateFilterCount();
+  render();
+  renderGenerated();
+  note.textContent = picked.length
+    ? "Dialed in: " + picked.join(" · ")
+    : "Open cut — tell me equipment, time or focus to dial it in.";
+  document.querySelector(".generator").scrollIntoView({behavior:"smooth", block:"start"});
+});
+document.getElementById("coachInput").addEventListener("keydown", (e)=>{
+  if(e.key === "Enter" && !e.shiftKey){
+    e.preventDefault();
+    document.getElementById("coachPrompt").requestSubmit();
+  }
+});
 
 document.getElementById("logList").addEventListener("click", (e)=>{
   const btn = e.target.closest(".le-del");
